@@ -1,8 +1,8 @@
 <template>
-    <h1>Login</h1>
-    <HelloWorld />
+  <h1>Login</h1>
+  <HelloWorld />
 </template>
 
 <script setup>
-import HelloWorld from '@/components/HelloWorld.vue';
+import HelloWorld from "@/components/HelloWorld.vue";
 </script>

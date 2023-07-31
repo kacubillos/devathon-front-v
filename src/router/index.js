@@ -1,16 +1,16 @@
 import { createRouter, createWebHistory } from "vue-router";
-import LoginView from '@/views/LoginView.vue';
+import LoginView from "@/views/LoginView.vue";
 
 const routes = [
-    {
-        path: '/login',
-        component: LoginView
-    }
-]
+  {
+    path: "/login",
+    component: LoginView,
+  },
+];
 
 const router = createRouter({
-    history: createWebHistory(),
-    routes
+  history: createWebHistory(),
+  routes,
 });
 
-export default router
+export default router;
