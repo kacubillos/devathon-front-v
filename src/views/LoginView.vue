@@ -19,9 +19,9 @@
           class="form-control"
           placeholder="Contraseña"
         />
-        <a href="#" class="link d-block text-center text-md-end my-3"
-          >Recuperar contraseña</a
-        >
+        <p class="d-block text-center text-md-end my-3">
+          <a href="#" class="link">Recuperar contraseña</a>
+        </p>
         <button type="submit" class="btn btn-primary w-100">
           Iniciar sesión
         </button>
