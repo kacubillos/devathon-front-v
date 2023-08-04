@@ -4,6 +4,7 @@ import useAuthStore from "@/store/auth";
 import PageNotFoundView from "@/views/PageNotFoundView.vue";
 import LoginView from "@/views/LoginView.vue";
 import ForgotPwdView from "@/views/ForgotPwdView.vue";
+import ResetPwdView from "@/views/ResetPwdView.vue";
 import HomeView from "@/views/HomeView.vue";
 
 const routes = [
@@ -21,7 +22,15 @@ const routes = [
   },
   {
     path: "/login/forgot",
+    name: "forgotPwd",
     component: ForgotPwdView,
+    meta: { requireAuth: false },
+  },
+  {
+    path: "/login/reset",
+    name: "resetPwd",
+    component: ResetPwdView,
+    meta: { requireAuth: false },
   },
   {
     /* if this path is not the last item, 404 error is displayed */
