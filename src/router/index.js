@@ -1,8 +1,10 @@
 import { createRouter, createWebHistory } from "vue-router";
-import LoginView from "@/views/LoginView.vue";
-import PageNotFoundView from "@/views/PageNotFoundView.vue";
-import HomeView from "@/views/HomeView.vue";
 import useAuthStore from "@/store/auth";
+
+import PageNotFoundView from "@/views/PageNotFoundView.vue";
+import LoginView from "@/views/LoginView.vue";
+import ForgotPwdView from "@/views/ForgotPwdView.vue";
+import HomeView from "@/views/HomeView.vue";
 
 const routes = [
   {
@@ -16,6 +18,10 @@ const routes = [
     name: "login",
     component: LoginView,
     meta: { requireAuth: false },
+  },
+  {
+    path: "/login/forgot",
+    component: ForgotPwdView,
   },
   {
     /* if this path is not the last item, 404 error is displayed */
