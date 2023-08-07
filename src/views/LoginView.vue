@@ -3,8 +3,13 @@
     class="row align-items-start align-items-md-center justify-content-center vh-100"
   >
     <section class="text-center col-12 col-md-10 col-lg-6 px-5 py-4 my-4 form">
+      <!-- Alert error -->
+      <div v-if="error !== ''" class="alert alert-danger" role="alert">
+        {{ error }}
+      </div>
+      <!-- Login form -->
       <h1>¡Te damos la bienvenida de nuevo!</h1>
-      <form class="my-3">
+      <form class="my-3" @submit.prevent="login">
         <input
           id="inputEmail"
           v-model="email"
@@ -39,11 +44,29 @@
 
 <script setup>
 import { ref } from "vue";
+import { useRouter, useRoute } from "vue-router";
+import useAuthStore from "@/store/auth";
 
 const isHide = ref(true);
-
 const changeVisibility = () => {
   isHide.value = !isHide.value;
+};
+
+const email = ref("");
+const password = ref("");
+const error = ref("");
+
+const router = useRouter();
+const route = useRoute();
+
+const login = async () => {
+  const auth = useAuthStore();
+  const isSuccess = await auth.login(email.value, password.value);
+
+  if (isSuccess) {
+    if (route.query.returnUrl) router.push({ path: route.query.returnUrl });
+    else router.push({ name: "home" });
+  } else error.value = auth.error;
 };
 </script>
 

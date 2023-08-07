@@ -22,7 +22,7 @@ const useAuthStore = defineStore("auth", {
 
         /* Verify success response */
         if (res.status !== 200) {
-          this.error = "Tus datos son incorrectos.";
+          this.error = "Tus datos son incorrectos. Vuelve a intentarlo.";
           return false;
         }
 
@@ -31,7 +31,7 @@ const useAuthStore = defineStore("auth", {
         axios.defaults.headers.common["Authorization"] = "Bearer " + this.token;
         return true;
       } catch (error) {
-        this.error = "Tus datos son incorrectos.";
+        this.error = "Tus datos son incorrectos. Vuelve a intentarlo.";
         return false;
       }
     },

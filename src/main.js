@@ -11,7 +11,7 @@ import "bootstrap/dist/css/bootstrap.css";
 import "normalize.css";
 
 /* Define base url for all requests */
-axios.defaults.baseURL = "http://localhost:8080/";
+axios.defaults.baseURL = import.meta.env.VITE_BACKEND_URL;
 
 /* create pinia's instance and use the persistance plugin */
 const pinia = createPinia();
