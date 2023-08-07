@@ -29,6 +29,9 @@ const router = createRouter({
   routes,
 });
 
+/**
+ * Function to check permissions before accessing a route
+ */
 router.beforeEach((to, from, next) => {
   const auth = useAuthStore();
   const isAuth = auth.token;

@@ -47,18 +47,22 @@ import { ref } from "vue";
 import { useRouter, useRoute } from "vue-router";
 import useAuthStore from "@/store/auth";
 
+/* Show or hide the password */
 const isHide = ref(true);
 const changeVisibility = () => {
   isHide.value = !isHide.value;
 };
 
+const router = useRouter();
+const route = useRoute();
+
 const email = ref("");
 const password = ref("");
 const error = ref("");
 
-const router = useRouter();
-const route = useRoute();
-
+/**
+ * Function to start a new session, this redirect to home or show the message error
+ */
 const login = async () => {
   const auth = useAuthStore();
   const isSuccess = await auth.login(email.value, password.value);

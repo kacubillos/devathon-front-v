@@ -1,4 +1,5 @@
 <template>
+  <!-- NavBar - This is not show in the login view -->
   <nav
     v-if="router.currentRoute.value.name != 'login'"
     class="navbar navbar-expand-lg navbar-dark bg-dark sticky-top"
@@ -31,6 +32,7 @@
     </div>
   </nav>
 
+  <!-- Page content -->
   <div class="container">
     <router-view />
   </div>
@@ -42,6 +44,9 @@ import useAuthStore from "@/store/auth";
 
 const router = useRouter();
 
+/**
+ * Function to close a session, this redirect to login view
+ */
 const logout = () => {
   const auth = useAuthStore();
   auth.logout();
