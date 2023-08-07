@@ -23,9 +23,7 @@
             <router-link class="nav-link" to="/">Inicio</router-link>
           </li>
           <li class="nav-item">
-            <button class="btn btn-primary" @click="logout">
-              Cerrar sesión
-            </button>
+            <button class="btn-black" @click="logout">Cerrar sesión</button>
           </li>
         </ul>
       </div>
