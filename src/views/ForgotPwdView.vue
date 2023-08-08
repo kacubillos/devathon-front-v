@@ -3,10 +3,15 @@
     class="row align-items-start align-items-md-center justify-content-center vh-100"
   >
     <section class="text-center col-12 col-md-10 col-lg-6 px-5 py-4 my-4 form">
+      <!-- Alert error -->
+      <div v-if="error !== ''" class="alert alert-danger" role="alert">
+        {{ error }}
+      </div>
+
       <!-- Forgot password form -->
       <template v-if="!recoverySend">
         <h1>¿Has olvidado la contraseña?</h1>
-        <form class="my-3">
+        <form class="my-3" @submit.prevent="sendLink">
           <input
             id="inputEmail"
             type="email"
@@ -31,8 +36,13 @@
       <template v-else>
         <h2>Enlace de recuperación enviado</h2>
         <p>Revisa tu correo electronico y sigue las instrucciones.</p>
+        <img
+          src="@/assets/mail-sent.svg"
+          class="w-25 mt-2 mb-4"
+          alt="Vue icon"
+        />
         <p>
-          <router-link :to="{ name: 'login' }"
+          <router-link :to="{ name: 'login' }" class="link"
             >Regresar a inicio de sesión</router-link
           >
         </p>
@@ -45,6 +55,11 @@
 import { ref } from "vue";
 
 const recoverySend = ref(false);
+const error = ref("");
+
+const sendLink = () => {
+  recoverySend.value = true;
+};
 </script>
 
 <style scoped>
