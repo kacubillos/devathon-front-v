@@ -32,7 +32,9 @@
           </span>
         </div>
         <p class="d-block text-center text-md-end my-3">
-          <a href="#" class="link">Recuperar contraseña</a>
+          <router-link :to="{ name: 'forgotPwd' }" class="link"
+            >Recuperar contraseña</router-link
+          >
         </p>
         <button type="submit" class="btn-purple w-100">Iniciar sesión</button>
         <hr class="my-4" />

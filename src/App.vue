@@ -1,7 +1,7 @@
 <template>
   <!-- NavBar - This is not show in the login view -->
   <nav
-    v-if="router.currentRoute.value.name != 'login'"
+    v-if="auth.token !== null"
     class="navbar navbar-expand-lg navbar-dark bg-dark sticky-top"
   >
     <div class="container">
@@ -41,12 +41,12 @@ import { useRouter } from "vue-router";
 import useAuthStore from "@/store/auth";
 
 const router = useRouter();
+const auth = useAuthStore();
 
 /**
  * Function to close a session, this redirect to login view
  */
 const logout = () => {
-  const auth = useAuthStore();
   auth.logout();
 
   router.push({ name: "login" });

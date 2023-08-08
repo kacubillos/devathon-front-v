@@ -37,6 +37,16 @@ const routes = [
     path: "/:pathMatch(.*)*",
     component: PageNotFoundView,
   },
+  {
+    path: "/login/forgot",
+    name: "forgotPwd",
+    component: ForgotPwdView,
+  },
+  {
+    path: "/login/reset",
+    name: "resetPwd",
+    component: ResetPwdView,
+  },
 ];
 
 const router = createRouter({
