@@ -14,5 +14,6 @@
     "no-unused-vars": "error",
     "no-empty-function": "error",
     "no-implicit-coercion": "warn"
-  }
+  },
+  "root": true
 }

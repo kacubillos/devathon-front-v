@@ -1,3 +1,7 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
 :root {
   font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
   line-height: 1.5;
@@ -73,6 +77,11 @@ button:focus-visible {
   margin: 0 auto;
   padding: 2rem;
   text-align: center;
+}
+.error-message {
+  color: #dc2626;
+  font-size: 1.1em;
+  text-align: left;
 }
 
 @media (prefers-color-scheme: light) {
