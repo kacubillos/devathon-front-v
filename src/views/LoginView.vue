@@ -34,7 +34,12 @@
         </p>
         <button type="submit" class="btn-purple w-100">Iniciar sesión</button>
         <hr class="my-4" />
-        <p>¿No tienes una cuenta? <a href="#" class="link">Registrate</a></p>
+        <p>
+          ¿No tienes una cuenta?
+          <router-link :to="{ name: 'register' }" class="link"
+            >Registrate</router-link
+          >
+        </p>
       </form>
     </section>
   </div>

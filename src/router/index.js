@@ -1,5 +1,6 @@
 import { createRouter, createWebHistory } from "vue-router";
 import LoginView from "@/views/LoginView.vue";
+import RegisterView from "@/views/RegisterView.vue";
 import PageNotFoundView from "@/views/PageNotFoundView.vue";
 import HomeView from "@/views/HomeView.vue";
 import useAuthStore from "@/store/auth";
@@ -16,6 +17,12 @@ const routes = [
     path: "/login",
     name: "login",
     component: LoginView,
+    meta: { requireAuth: false },
+  },
+  {
+    path: "/registro",
+    name: "register",
+    component: RegisterView,
     meta: { requireAuth: false },
   },
   {
