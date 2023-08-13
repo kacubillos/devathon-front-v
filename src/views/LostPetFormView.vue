@@ -6,15 +6,12 @@
         class="lost-pet-form"
         :validation-schema="lostPetRegistrationSchema"
         @submit="registerLostPet"
+        @keydown.enter="$event.preventDefault()"
       >
         <div class="user-info">
           <div class="user-info-photo">
             <!-- <img :src="user.photo" alt="User image" /> -->
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              height="1em"
-              viewBox="0 0 448 512"
-            >
+            <svg xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 448 512">
               <path
                 d="M224 256A128 128 0 1 0 224 0a128 128 0 1 0 0 256zm-45.7 48C79.8 304 0 383.8 0 482.3C0 498.7 13.3 512 29.7 512H418.3c16.4 0 29.7-13.3 29.7-29.7C448 383.8 368.2 304 269.7 304H178.3z"
               />
@@ -22,10 +19,7 @@
           </div>
           <p>{{ user.name }}</p>
         </div>
-        <DropzoneImage
-          ref="DropzoneImageRef"
-          @image-upload-change="imageUploadChange"
-        />
+        <DropzoneImage ref="DropzoneImageRef" @image-upload-change="imageUploadChange" />
         <p v-if="!minImagesUploaded" class="error-message text-left">
           *Es necesario añadir una foto.
         </p>
@@ -45,26 +39,17 @@
             <div class="input-item">
               <label for="petSpecie">Especie</label>
               <vee-field id="petSpecie" type="text" name="petSpecie" />
-              <ErrorMessage
-                name="petSpecie"
-                class="error-message"
-              ></ErrorMessage>
+              <ErrorMessage name="petSpecie" class="error-message"></ErrorMessage>
             </div>
             <div class="input-item">
               <label for="petBreed">Raza</label>
               <vee-field id="petBreed" type="text" name="petBreed" />
-              <ErrorMessage
-                name="petBreed"
-                class="error-message"
-              ></ErrorMessage>
+              <ErrorMessage name="petBreed" class="error-message"></ErrorMessage>
             </div>
             <div class="input-item">
               <label for="petColor">Color</label>
               <vee-field id="petColor" type="text" name="petColor" />
-              <ErrorMessage
-                name="petColor"
-                class="error-message"
-              ></ErrorMessage>
+              <ErrorMessage name="petColor" class="error-message"></ErrorMessage>
             </div>
             <div class="input-item">
               <label for="petDescription">Descripción de la mascota</label>
@@ -74,44 +59,26 @@
                 as="textarea"
                 placeholder="Se lo mas descriptivo posible..."
               />
-              <ErrorMessage
-                name="petDescription"
-                class="error-message"
-              ></ErrorMessage>
+              <ErrorMessage name="petDescription" class="error-message"></ErrorMessage>
             </div>
           </div>
         </div>
         <div class="checkbox-filter-main-container mt-">
           <h4>
-            Selecciona alguna opción que pueda ayudar a identificar la
-            publicación y brinde más información
+            Selecciona alguna opción que pueda ayudar a identificar la publicación y brinde más
+            información
           </h4>
           <div class="checkbox-filter-container">
             <div class="checkbox-item item1">
-              <vee-field
-                id="petCBCorrea"
-                type="checkbox"
-                name="petCBCorrea"
-                value="Correa"
-              />
+              <vee-field id="petCBCorrea" type="checkbox" name="petCBCorrea" value="Correa" />
               <label for="petCBCorrea">Correa</label>
             </div>
             <div class="checkbox-item item2">
-              <vee-field
-                id="petCBCollar"
-                type="checkbox"
-                name="petCBCollar"
-                value="Collar"
-              />
+              <vee-field id="petCBCollar" type="checkbox" name="petCBCollar" value="Collar" />
               <label for="petCBCollar">Collar</label>
             </div>
             <div class="checkbox-item item3">
-              <vee-field
-                id="petCBBicolor"
-                type="checkbox"
-                name="petCBBicolor"
-                value="Bicolor"
-              />
+              <vee-field id="petCBBicolor" type="checkbox" name="petCBBicolor" value="Bicolor" />
               <label for="petCBBicolor">Bicolor</label>
             </div>
             <div class="checkbox-item item4">
@@ -159,28 +126,40 @@
               />
               <label for="petCBColaCorta">Cola corta</label>
             </div>
+            <div class="checkbox-item item9">
+              <vee-field id="petCBConPlaca" type="checkbox" name="petCBConPlaca" value="ConPlaca" />
+              <label for="petCBConPlaca">Con placa</label>
+            </div>
+            <div class="checkbox-item item10">
+              <vee-field id="petCBSinPlaca" type="checkbox" name="petCBSinPlaca" value="SinPlaca" />
+              <label for="petCBSinPlaca">Sin placa</label>
+            </div>
           </div>
         </div>
         <div class="location-container">
-          <div class="location-input">
-            <label for="locationInput">Localización</label>
-            <input id="locationInput" type="text" name="locationInput" />
+          <div style="text-align: left" class="mb-3">
+            <vee-field
+              ref="petLastLocation"
+              v-model="petLastLocation"
+              name="petLastLocation"
+              style="display: none"
+            />
+            <ErrorMessage name="petLastLocation" type="text" class="error-message"></ErrorMessage>
           </div>
+          <MapComponent
+            @pet-location="onPetLastLocationInput"
+            @remove-address-value="onRemoveAddressValue"
+          />
           <div class="details-location-last-seen">
             <div class="lastSeenDesc">
-              <label for="lastSeenDesc"
-                >¿Dónde y a qué hora se vió la última vez?</label
-              >
+              <label for="lastSeenDesc">¿Dónde y a qué hora se vió la última vez?</label>
               <vee-field
                 id="lastSeenDesc"
                 name="lastSeenDesc"
                 as="textarea"
                 placeholder="Describe detalladamente el último lugar visto..."
               />
-              <ErrorMessage
-                name="lastSeenDesc"
-                class="error-message"
-              ></ErrorMessage>
+              <ErrorMessage name="lastSeenDesc" class="error-message"></ErrorMessage>
             </div>
           </div>
         </div>
@@ -196,12 +175,14 @@
 
 <script>
 import DropzoneImage from "@/components/DropzoneImage.vue";
+import MapComponent from "@/components/MapComponent.vue";
 // import axios from "axios";
 
 export default {
   name: "LostPetFormView",
   components: {
     DropzoneImage,
+    MapComponent,
   },
   data() {
     return {
@@ -216,12 +197,13 @@ export default {
         petColor: "required|alphaSpaces|min:3|max:100",
         petDescription: "required|alphaSpaces|min:3|max:500",
         lastSeenDesc: "required|alphaSpaces|min:3|max:500",
+        petLastLocation: "required",
       },
       petCBOptions: [],
       minImagesUploaded: true,
       petImagesURL: [],
-      petLastLocation: "",
       responseError: "",
+      petLastLocation: "",
     };
   },
   watch: {
@@ -259,23 +241,30 @@ export default {
         }
       }
       values.filterOptions = this.petCBOptions;
-      // console.log(values);
+      console.log(values);
       try {
         const uploadRequest = await this.$refs.DropzoneImageRef.uploadImages();
-        console.log(uploadRequest);
-        // const axiosRequest = await axios.post("http://", {
-        //   values,
-        // });
-        // console.log(axiosRequest);
+        this.petImagesURL = uploadRequest;
       } catch (e) {
         console.log(e);
       }
+      values.petImagesURL = this.petImagesURL;
     },
     // Checks if the user submited a photo, if not feedback is given
     imageUploadChange(value) {
       if (value.value > 0) {
         this.minImagesUploaded = true;
       } else this.minImagesUploaded = false;
+    },
+    onPetLastLocationInput(value) {
+      if (value.sucess) {
+        this.petLastLocation = value.data;
+        document.getElementById("addressInput").value = value.data;
+      } else this.responseError = value.data;
+    },
+    onRemoveAddressValue() {
+      this.petLastLocation = "";
+      document.getElementById("addressInput").value = "";
     },
   },
 };

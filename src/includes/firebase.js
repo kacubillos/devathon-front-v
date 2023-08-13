@@ -1,9 +1,4 @@
-import {
-  getStorage,
-  ref as refFirebase,
-  uploadBytes,
-  getDownloadURL,
-} from "firebase/storage";
+import { getStorage, ref as refFirebase, uploadBytes, getDownloadURL } from "firebase/storage";
 
 export async function uploadImages(dropzoneRef) {
   const petImagesURL = [];
