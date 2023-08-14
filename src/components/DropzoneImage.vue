@@ -39,12 +39,12 @@ watch(imagesUploaded, (newimagesUploadedNum, oldimagesUploadedNum) => {
   emit("image-upload-change", imagesUploaded);
 });
 
-async function uploadImages() {
+async function uploadImages(postId) {
   try {
-    petImagesURL = await fbUploadImages(myDropzoneRef);
+    petImagesURL = await fbUploadImages(myDropzoneRef, postId);
     return petImagesURL;
   } catch (error) {
-    console.error("Ha ocurrido un error, intenta mas tarde");
+    return error;
   }
 }
 // defineExpose will expose any function, var when using setup so it can be accessed in an instance

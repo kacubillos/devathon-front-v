@@ -7,6 +7,7 @@
         :validation-schema="lostPetRegistrationSchema"
         @submit="registerLostPet"
         @keydown.enter="$event.preventDefault()"
+        @invalid-submit="onInvalidSubmit"
       >
         <div class="user-info">
           <div class="user-info-photo">
@@ -164,18 +165,227 @@
           </div>
         </div>
 
-        <div class="publish-btn"><button type="submit">Publicar</button></div>
-        <p v-if="!minImagesUploaded" class="error-message mt-4 text-center">
+        <div class="publish-btn">
+          <button
+            type="submit"
+            :class="onSubmit ? 'on-submit' : ''"
+            :disabled="onSubmit ? true : false"
+          >
+            <span v-if="!onSubmit">Publicar</span>
+            <svg
+              v-else
+              xmlns="http://www.w3.org/2000/svg"
+              xmlns:xlink="http://www.w3.org/1999/xlink"
+              style="margin: auto; background: none; display: block; shape-rendering: auto"
+              width="200px"
+              height="200px"
+              viewBox="0 0 100 100"
+              preserveAspectRatio="xMidYMid"
+            >
+              <g transform="translate(80,50)">
+                <g transform="rotate(0)">
+                  <circle cx="0" cy="0" r="6" fill="#fffafa" fill-opacity="1">
+                    <animateTransform
+                      attributeName="transform"
+                      type="scale"
+                      begin="-0.875s"
+                      values="1.5 1.5;1 1"
+                      keyTimes="0;1"
+                      dur="1s"
+                      repeatCount="indefinite"
+                    ></animateTransform>
+                    <animate
+                      attributeName="fill-opacity"
+                      keyTimes="0;1"
+                      dur="1s"
+                      repeatCount="indefinite"
+                      values="1;0"
+                      begin="-0.875s"
+                    ></animate>
+                  </circle>
+                </g>
+              </g>
+              <g transform="translate(71.21320343559643,71.21320343559643)">
+                <g transform="rotate(45)">
+                  <circle cx="0" cy="0" r="6" fill="#fffafa" fill-opacity="0.875">
+                    <animateTransform
+                      attributeName="transform"
+                      type="scale"
+                      begin="-0.75s"
+                      values="1.5 1.5;1 1"
+                      keyTimes="0;1"
+                      dur="1s"
+                      repeatCount="indefinite"
+                    ></animateTransform>
+                    <animate
+                      attributeName="fill-opacity"
+                      keyTimes="0;1"
+                      dur="1s"
+                      repeatCount="indefinite"
+                      values="1;0"
+                      begin="-0.75s"
+                    ></animate>
+                  </circle>
+                </g>
+              </g>
+              <g transform="translate(50,80)">
+                <g transform="rotate(90)">
+                  <circle cx="0" cy="0" r="6" fill="#fffafa" fill-opacity="0.75">
+                    <animateTransform
+                      attributeName="transform"
+                      type="scale"
+                      begin="-0.625s"
+                      values="1.5 1.5;1 1"
+                      keyTimes="0;1"
+                      dur="1s"
+                      repeatCount="indefinite"
+                    ></animateTransform>
+                    <animate
+                      attributeName="fill-opacity"
+                      keyTimes="0;1"
+                      dur="1s"
+                      repeatCount="indefinite"
+                      values="1;0"
+                      begin="-0.625s"
+                    ></animate>
+                  </circle>
+                </g>
+              </g>
+              <g transform="translate(28.786796564403577,71.21320343559643)">
+                <g transform="rotate(135)">
+                  <circle cx="0" cy="0" r="6" fill="#fffafa" fill-opacity="0.625">
+                    <animateTransform
+                      attributeName="transform"
+                      type="scale"
+                      begin="-0.5s"
+                      values="1.5 1.5;1 1"
+                      keyTimes="0;1"
+                      dur="1s"
+                      repeatCount="indefinite"
+                    ></animateTransform>
+                    <animate
+                      attributeName="fill-opacity"
+                      keyTimes="0;1"
+                      dur="1s"
+                      repeatCount="indefinite"
+                      values="1;0"
+                      begin="-0.5s"
+                    ></animate>
+                  </circle>
+                </g>
+              </g>
+              <g transform="translate(20,50.00000000000001)">
+                <g transform="rotate(180)">
+                  <circle cx="0" cy="0" r="6" fill="#fffafa" fill-opacity="0.5">
+                    <animateTransform
+                      attributeName="transform"
+                      type="scale"
+                      begin="-0.375s"
+                      values="1.5 1.5;1 1"
+                      keyTimes="0;1"
+                      dur="1s"
+                      repeatCount="indefinite"
+                    ></animateTransform>
+                    <animate
+                      attributeName="fill-opacity"
+                      keyTimes="0;1"
+                      dur="1s"
+                      repeatCount="indefinite"
+                      values="1;0"
+                      begin="-0.375s"
+                    ></animate>
+                  </circle>
+                </g>
+              </g>
+              <g transform="translate(28.78679656440357,28.786796564403577)">
+                <g transform="rotate(225)">
+                  <circle cx="0" cy="0" r="6" fill="#fffafa" fill-opacity="0.375">
+                    <animateTransform
+                      attributeName="transform"
+                      type="scale"
+                      begin="-0.25s"
+                      values="1.5 1.5;1 1"
+                      keyTimes="0;1"
+                      dur="1s"
+                      repeatCount="indefinite"
+                    ></animateTransform>
+                    <animate
+                      attributeName="fill-opacity"
+                      keyTimes="0;1"
+                      dur="1s"
+                      repeatCount="indefinite"
+                      values="1;0"
+                      begin="-0.25s"
+                    ></animate>
+                  </circle>
+                </g>
+              </g>
+              <g transform="translate(49.99999999999999,20)">
+                <g transform="rotate(270)">
+                  <circle cx="0" cy="0" r="6" fill="#fffafa" fill-opacity="0.25">
+                    <animateTransform
+                      attributeName="transform"
+                      type="scale"
+                      begin="-0.125s"
+                      values="1.5 1.5;1 1"
+                      keyTimes="0;1"
+                      dur="1s"
+                      repeatCount="indefinite"
+                    ></animateTransform>
+                    <animate
+                      attributeName="fill-opacity"
+                      keyTimes="0;1"
+                      dur="1s"
+                      repeatCount="indefinite"
+                      values="1;0"
+                      begin="-0.125s"
+                    ></animate>
+                  </circle>
+                </g>
+              </g>
+              <g transform="translate(71.21320343559643,28.78679656440357)">
+                <g transform="rotate(315)">
+                  <circle cx="0" cy="0" r="6" fill="#fffafa" fill-opacity="0.125">
+                    <animateTransform
+                      attributeName="transform"
+                      type="scale"
+                      begin="0s"
+                      values="1.5 1.5;1 1"
+                      keyTimes="0;1"
+                      dur="1s"
+                      repeatCount="indefinite"
+                    ></animateTransform>
+                    <animate
+                      attributeName="fill-opacity"
+                      keyTimes="0;1"
+                      dur="1s"
+                      repeatCount="indefinite"
+                      values="1;0"
+                      begin="0s"
+                    ></animate>
+                  </circle>
+                </g>
+              </g>
+              <!-- [ldio] generated by https://loading.io/ -->
+            </svg>
+          </button>
+        </div>
+        <p v-if="errorSubmitting" class="error-message mt-4 text-center">
           *Es necesario llenar todos los campos requeridos.
         </p>
       </vee-form>
     </article>
+    <div v-if="errorOnRequest" class="bg-red-400 w-60 h-60">ERROR</div>
+    <ConfirmationModal />
   </main>
 </template>
 
 <script>
 import DropzoneImage from "@/components/DropzoneImage.vue";
 import MapComponent from "@/components/MapComponent.vue";
+import ConfirmationModal from "@/components/ConfirmationModal.vue";
+import { v4 as uuidv4 } from "uuid";
+
 // import axios from "axios";
 
 export default {
@@ -183,6 +393,7 @@ export default {
   components: {
     DropzoneImage,
     MapComponent,
+    ConfirmationModal,
   },
   data() {
     return {
@@ -200,10 +411,14 @@ export default {
         petLastLocation: "required",
       },
       petCBOptions: [],
-      minImagesUploaded: true,
-      petImagesURL: [],
-      responseError: "",
       petLastLocation: "",
+      postId: "",
+      minImagesUploaded: true,
+      errorSubmitting: false,
+      submitError: "",
+      errorOnRequest: false,
+      responseError: "",
+      onSubmit: false,
     };
   },
   watch: {
@@ -221,34 +436,43 @@ export default {
   },
   methods: {
     async registerLostPet(values) {
-      // Verifies if are images uploaded, if not, feedback is given to the user
-      if (this.$refs.DropzoneImageRef.imagesUploaded < 1) {
-        this.minImagesUploaded = false;
-        return;
-      } else this.minImagesUploaded = true;
-
-      this.petCBOptions = [];
-      // Adds to petCBOptions the checkboxes value that are checked
-      for (const key in values) {
-        if (key.startsWith("petCB") && values[key]) {
-          this.petCBOptions.push(values[key]);
-        }
-      }
-      // Removes the petCB key-value pairs from the values object
-      for (const key in values) {
-        if (key.startsWith("petCB")) {
-          delete values[key];
-        }
-      }
-      values.filterOptions = this.petCBOptions;
-      console.log(values);
+      this.onSubmit = true;
       try {
-        const uploadRequest = await this.$refs.DropzoneImageRef.uploadImages();
-        this.petImagesURL = uploadRequest;
+        this.postId = await uuidv4();
+        // Verifies if are images uploaded, if not, feedback is given to the user
+        if (this.$refs.DropzoneImageRef.imagesUploaded < 1) {
+          this.minImagesUploaded = false;
+          return;
+        } else this.minImagesUploaded = true;
+
+        this.petCBOptions = [];
+        // Adds to petCBOptions the checkboxes value that are checked
+        for (const key in values) {
+          if (key.startsWith("petCB") && values[key]) {
+            this.petCBOptions.push(values[key]);
+          }
+        }
+        // Removes the petCB key-value pairs from the values object
+        for (const key in values) {
+          if (key.startsWith("petCB")) {
+            delete values[key];
+          }
+        }
+        values.filterOptions = this.petCBOptions;
+        const uploadRequest = await this.$refs.DropzoneImageRef.uploadImages(this.postId);
+        if (!uploadRequest.sucess) throw uploadRequest.error;
+
+        values.petImagesURL = uploadRequest;
+        values.postId = this.postId;
+
+        // TODO --- FINISH AXIOS REQUEST
+        console.log(values);
+        // const axiosRequest = axios.post("http://", { values });
       } catch (e) {
+        this.errorOnRequest = true;
+        // TODO - HANDLE ERROR ON REQUEST
         console.log(e);
       }
-      values.petImagesURL = this.petImagesURL;
     },
     // Checks if the user submited a photo, if not feedback is given
     imageUploadChange(value) {
@@ -260,19 +484,25 @@ export default {
       if (value.sucess) {
         this.petLastLocation = value.data;
         document.getElementById("addressInput").value = value.data;
-      } else this.responseError = value.data;
+      }
     },
     onRemoveAddressValue() {
       this.petLastLocation = "";
       document.getElementById("addressInput").value = "";
+    },
+    onInvalidSubmit() {
+      if (this.$refs.DropzoneImageRef.imagesUploaded < 1) {
+        this.minImagesUploaded = false;
+      } else this.minImagesUploaded = true;
+      this.errorSubmitting = true;
     },
   },
 };
 </script>
 
 <style scoped lang="scss">
-main,
 article {
+  padding: 20px 0;
   h1 {
     padding: 15px 0;
   }
@@ -281,11 +511,14 @@ article {
 article {
   min-width: 300px;
   max-width: 900px;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.101676);
+  box-shadow: 0 2px 5px rgba(185, 13, 13, 0.12);
 }
 input,
 textarea {
   color: #212121;
+}
+button:hover {
+  background: #101000;
 }
 .lost-pet-form {
   width: 100%;
@@ -480,6 +713,23 @@ textarea {
       }
     }
   }
+}
+.publish-btn {
+  button {
+    width: 50%;
+    padding: 0.9em 1.6em;
+    span {
+      line-height: 1.5rem;
+    }
+    svg {
+      width: 25px;
+      height: 25px;
+    }
+  }
+}
+
+.on-submit:hover {
+  cursor: not-allowed;
 }
 @media screen and (min-width: 900px) {
   .inputs-container {

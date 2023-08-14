@@ -1,6 +1,6 @@
 import { getStorage, ref as refFirebase, uploadBytes, getDownloadURL } from "firebase/storage";
 
-export async function uploadImages(dropzoneRef) {
+export async function uploadImages(dropzoneRef, postId) {
   const petImagesURL = [];
   try {
     const storageRef = getStorage();
@@ -15,7 +15,7 @@ export async function uploadImages(dropzoneRef) {
         dropzoneRef.files.map(async (file) => {
           const imageRef = refFirebase(
             storageRef,
-            `lost-posts/userId/lost-post/postId/images/${file.upload.uuid}.png`,
+            `lost-posts/userId/lost-post/${postId}/images/${file.upload.uuid}.png`,
           );
           const uploadTask = await uploadBytes(imageRef, file, metaData);
 
@@ -23,11 +23,10 @@ export async function uploadImages(dropzoneRef) {
           petImagesURL.push(downloadURL);
         }),
       );
-      return petImagesURL;
-    } else return { sucess: false, message: "No hay archivos." };
-  } catch (e) {
-    console.log(e);
-    throw e;
+      return { sucess: true, data: petImagesURL };
+    } else return { sucess: false, error: "No hay archivos." };
+  } catch (error) {
+    return { sucess: false, error: "Ha ocurrido un error, intenta mas tarde." };
   }
 }
 

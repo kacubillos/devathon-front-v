@@ -92,15 +92,16 @@ export default {
         geocoder.geocode({ location: coordsFunc }, function (results, status) {
           if (status === "OK") {
             if (results[0]) {
-              emit("pet-location", { sucess: true, data: results[0].formatted_address });
-            } else {
+              errorMessage.value = "";
               emit("pet-location", {
-                sucess: false,
-                data: "No se encontró resultados con estas coordenadas.",
+                sucess: true,
+                data: results[0].formatted_address,
               });
+            } else {
+              errorMessage.value = "No se encontró resultados con estas coordenadas.";
             }
           } else {
-            emit("pet-location", { sucess: false, data: "Hubo un error, intenta mas tarde." });
+            errorMessage.value = "No se encontró resultados con estas coordenadas.";
           }
         });
       } catch (e) {
@@ -130,6 +131,7 @@ export default {
 
     onMounted(async () => {
       try {
+        // Gets the country code according to the user's api so the map autocomplete shows their country
         const response = await axios(`http://ip-api.com/json`);
         autocompleteOptions.componentRestrictions.country = response.data.countryCode;
       } catch (error) {
@@ -152,6 +154,7 @@ export default {
 
       autocomplete.addListener("place_changed", async () => {
         const place = await autocomplete.getPlace();
+        errorMessage.value = "";
 
         if (!place.geometry || !place.geometry.location || addressInputRef.value.value === "") {
           // User entered the name of a Place that was not suggested and
@@ -193,6 +196,9 @@ export default {
 
 <style lang="scss" scoped>
 .location-container {
+  button:hover {
+    background: #101000;
+  }
   margin-top: 2rem;
   padding: 2rem 0;
   border-top: 2px solid #212121;
