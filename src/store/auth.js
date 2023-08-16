@@ -55,6 +55,31 @@ const useAuthStore = defineStore("auth", {
     logout() {
       this.token = null;
     },
+    /**
+     * Method to create a new user
+     * @param {Object} userData User information
+     * @returns {Boolean} Return true if the registration is successful
+     */
+    async register(userData) {
+      try {
+        const res = await axios({
+          method: "post",
+          url: "/users",
+          data: userData,
+        });
+
+        /* Verify success response */
+        if (res.status !== 201) {
+          this.error = "Tus datos son incorrectos. Vuelve a intentarlo.";
+          return false;
+        }
+
+        return true;
+      } catch (error) {
+        this.error = "Tus datos son incorrectos. Vuelve a intentarlo.";
+        return false;
+      }
+    },
   },
   persist: {
     /**
