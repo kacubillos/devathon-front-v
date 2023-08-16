@@ -112,12 +112,21 @@ body {
   color: var(--neutral-text-light);
 }
 
+.form-error, .form-error:hover {
+  border: 1px solid var(--red-100);
+}
+
+.form-error:focus {
+  outline: 1.3px solid var(--red-100);
+}
+
 .btn-black {
   background-color: var(--black-100);
   color: var(--bg-100);
   padding: var(--padding-button-2);
   border: none;
   border-radius: var(--border-radius-xs);
+  text-decoration: none;
 }
 
 .btn-black:hover {
@@ -130,6 +139,7 @@ body {
   padding: var(--padding-button-2);
   border: none;
   border-radius: var(--border-radius-xs);
+  text-decoration: none;
 }
 
 .btn-purple:hover {
