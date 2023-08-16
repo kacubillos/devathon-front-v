@@ -1,17 +1,14 @@
 <template>
-  <div
-    ref="modalTarget"
-    class="py-5 text-center px-6 w-[300px] min-h-[250px] max-h-[400px] max-w-[350px] flex flex-wrap flex-col justify-around items-center"
-  >
-    <div v-if="success === true" class="mt-4">
+  <div ref="modalTarget" class="conf-modal py-5 text-center px-3">
+    <div v-if="requestSuccess === true" class="mt-4">
       <div class="wrapper-conf">
         <svg class="checkmark" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 52 52">
           <circle class="checkmark__circle" cx="26" cy="26" r="25" fill="none" />
           <path class="checkmark__check" fill="none" d="M14.1 27.2l7.1 7.2 16.7-16.8" />
         </svg>
       </div>
-      <div class="block my-4">
-        <span class="font-bold text-[1.2rem]">¡Listo!</span>
+      <div class="my-4 span-msg">
+        <span>¡Listo!</span>
       </div>
     </div>
     <div v-else class="mt-4">
@@ -22,18 +19,19 @@
         </div>
       </div>
 
-      <div class="block my-4">
-        <span class="font-bold text-[1.2rem]">¡Error!</span>
+      <div class="my-4 span-msg">
+        <span>¡Hubo en error!</span>
       </div>
     </div>
-    <div class="block text-[1.1rem]">
+    <div style="font-size: 1.1rem">
       <span>{{ responseMessage }}</span>
     </div>
     <button
       v-if="closeConfirmationButton"
       type="button"
-      class="btn-submit m-0 py-[5px] text-[1.1rem]"
-      @click="closeConfiModal"
+      style="font-size: 1.1rem"
+      class="mt-3"
+      @click="closeConfirModal"
     >
       Cerrar
     </button>
@@ -42,7 +40,7 @@
 
 <script>
 import { mapActions, mapStores } from "pinia";
-import useModalsStore from "@/stores/modalsStore";
+import useModalsStore from "@/store/modalsStore";
 
 import { onClickOutside } from "@vueuse/core";
 import { ref } from "vue";
@@ -51,20 +49,12 @@ export default {
   name: "ConfirmationModal",
   props: {
     responseMessage: String,
-    success: Boolean,
+    requestSuccess: Boolean,
     closeConfirmationButton: Boolean,
   },
   emits: ["bgCloseConfirmationModal", "closing-modal-timeOut", "close-confirmation-modal-button"],
   data() {
     return {};
-  },
-  methods: {
-    ...mapActions(useModalsStore, {
-      closeConfirmationModal: "closeConfirmationModal",
-    }),
-    closeConfiModal() {
-      this.$emit("close-confirmation-modal-button");
-    },
   },
   computed: {
     ...mapStores(useModalsStore),
@@ -81,6 +71,14 @@ export default {
       this.$emit("closing-modal-timeOut");
     });
   },
+  methods: {
+    ...mapActions(useModalsStore, {
+      closeConfirmationModal: "closeConfirmationModal",
+    }),
+    closeConfirModal() {
+      this.$emit("close-confirmation-modal-button");
+    },
+  },
 };
 </script>
 
@@ -90,10 +88,35 @@ export default {
   --circle-size: 60px;
 }
 
+.conf-modal {
+  width: 300px;
+  min-height: 250px;
+  max-height: 400px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  align-items: center;
+  flex-direction: column;
+  position: relative;
+  vertical-align: bottom;
+  background: #ffffff;
+  border-radius: 0.5rem;
+  text-align: left;
+  overflow: hidden;
+  transition-property: all;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  transition-duration: 150ms;
+}
 .wrapper-conf {
   display: flex;
   justify-content: center;
   align-items: center;
+}
+.span-msg {
+  span {
+    font-weight: bold;
+    font-size: 1.2rem;
+  }
 }
 .checkmark__circle {
   stroke-dasharray: 166;
@@ -148,7 +171,7 @@ export default {
   display: flex;
   justify-content: center;
   align-items: center;
-  box-shadow: 0 2px 10px 10px rgba(#000, 0.05);
+  // box-shadow: 0 2px 10px 10px rgba(#000, 0.05);
 }
 
 .circle,

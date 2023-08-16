@@ -9,7 +9,7 @@ export async function uploadImages(dropzoneRef, postId) {
       contentType: "image/png",
     };
 
-    // TODO send user id and post id
+    // TODO send user id
     if (dropzoneRef.files.length) {
       await Promise.all(
         dropzoneRef.files.map(async (file) => {

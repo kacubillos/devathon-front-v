@@ -57,7 +57,7 @@ export default {
     let errorMessage = ref(null);
 
     const loader = new Loader({
-      apiKey: "AIzaSyDb3CfMKaLCBz4RqDszlWHRfYq4yFhA5xo",
+      apiKey: import.meta.env.GOOGLE_API_KEY,
       version: "weekly",
     });
     //Mexico City coords - default

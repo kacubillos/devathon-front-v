@@ -375,8 +375,51 @@
         </p>
       </vee-form>
     </article>
-    <div v-if="errorOnRequest" class="bg-red-400 w-60 h-60">ERROR</div>
-    <ConfirmationModal />
+
+    <!-- Modal to confirm if post was sucessfully or if there was an error -->
+    <div
+      v-if="bgConfirmationModalIsOpen"
+      style="position: fixed; z-index: 100; inset: 0; overflow: hidden"
+      class="pt-4 px-4 pb-16"
+    >
+      <div
+        style="display: flex; justify-content: center; align-items: center; min-height: 100vh"
+        class="text-center"
+      >
+        <div
+          style="
+            position: fixed;
+            inset: 0;
+            overflow: hidden;
+            transition-property: opacity;
+            transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+            transition-duration: 150ms;
+          "
+        >
+          <div
+            style="position: absolute; inset: 0; background-color: rgb(31 41 55 / 1)"
+            class="opacity-75"
+          ></div>
+        </div>
+
+        <!-- This element is to trick the browser into centering the modal contents. -->
+        <span class="hidden sm:inline-block sm:align-middle sm:h-screen">&#8203;</span>
+
+        <!-- Add margin if you want to see some of the overlay behind the modal-->
+        <Transition
+          enter-active-class="animate__animated animate__bounceIn"
+          leave-active-class="animate__animated animate__bounceOut"
+        >
+          <ConfirmationModal
+            v-if="ConfirmationModalIsOpen"
+            :response-message="responseMessage"
+            :request-success="requestSuccess"
+            :close-confirmation-button="closeConfirmationButton"
+            @close-confirmation-modal-button="closeConfirmationModal"
+          />
+        </Transition>
+      </div>
+    </div>
   </main>
 </template>
 
@@ -384,6 +427,7 @@
 import DropzoneImage from "@/components/DropzoneImage.vue";
 import MapComponent from "@/components/MapComponent.vue";
 import ConfirmationModal from "@/components/ConfirmationModal.vue";
+import router from "@/router";
 import { v4 as uuidv4 } from "uuid";
 
 // import axios from "axios";
@@ -416,9 +460,12 @@ export default {
       minImagesUploaded: true,
       errorSubmitting: false,
       submitError: "",
-      errorOnRequest: false,
-      responseError: "",
+      responseMessage: "",
+      requestSuccess: false,
       onSubmit: false,
+      bgConfirmationModalIsOpen: false,
+      ConfirmationModalIsOpen: false,
+      closeConfirmationButton: true,
     };
   },
   watch: {
@@ -445,6 +492,7 @@ export default {
           return;
         } else this.minImagesUploaded = true;
 
+        // Resets the array
         this.petCBOptions = [];
         // Adds to petCBOptions the checkboxes value that are checked
         for (const key in values) {
@@ -459,6 +507,7 @@ export default {
           }
         }
         values.filterOptions = this.petCBOptions;
+
         const uploadRequest = await this.$refs.DropzoneImageRef.uploadImages(this.postId);
         if (!uploadRequest.sucess) throw uploadRequest.error;
 
@@ -466,13 +515,41 @@ export default {
         values.postId = this.postId;
 
         // TODO --- FINISH AXIOS REQUEST
-        console.log(values);
-        // const axiosRequest = axios.post("http://", { values });
-      } catch (e) {
-        this.errorOnRequest = true;
-        // TODO - HANDLE ERROR ON REQUEST
-        console.log(e);
+        // const axiosRequest = await axios.post("http://", { values });
+
+        let statusCode = 100; // CHANGE IT TO AXIOS REQUEST CODE
+        if (statusCode === 200) {
+          // Background for confirmation modal is open first
+          this.bgConfirmationModalIsOpen = true;
+          // Indicates the button to close the modal is false - because it will automatically be closed and redirected to the posts page
+          this.closeConfirmationButton = false;
+          // Response message indicating the post was published successfully
+          this.responseMessage = "¡Se ha publicado tu post con éxito!";
+          // Indicates the modal to show the success message
+          this.requestSuccess = true;
+          // Opens the confirmation modal
+          this.ConfirmationModalIsOpen = true;
+
+          // Closes automatically the modal after 2 seconds if it isn't manually closed and redirects to posts page
+          setTimeout(() => {
+            this.closeConfirmationModal();
+          }, 500);
+        } else {
+          throw { sucess: false, message: "error" };
+        }
+      } catch (error) {
+        // TODO - HANDLE ERROR ON REQUEST FROM FIREBASE UPLOAD AND AXIOS REQUEST
+        console.log(error);
+
+        // Background for confirmation modal is open first
+        this.bgConfirmationModalIsOpen = true;
+        // Response message indicating there was an error
+        this.responseMessage = error.message;
+        // Opens the confirmation modal
+        this.ConfirmationModalIsOpen = true;
       }
+      // Loading icon is removed from the submit button
+      this.onSubmit = false;
     },
     // Checks if the user submited a photo, if not feedback is given
     imageUploadChange(value) {
@@ -496,6 +573,15 @@ export default {
       } else this.minImagesUploaded = true;
       this.errorSubmitting = true;
     },
+    closeConfirmationModal() {
+      // First the confirmation modal
+      this.ConfirmationModalIsOpen = false;
+      // Then the background, to make it smooth and redirects to login page
+      setTimeout(() => {
+        this.bgConfirmationModalIsOpen = false;
+        router.go("/login");
+      }, 200);
+    },
   },
 };
 </script>
@@ -507,8 +593,6 @@ article {
     padding: 15px 0;
   }
   width: 100%;
-}
-article {
   min-width: 300px;
   max-width: 900px;
   box-shadow: 0 2px 5px rgba(185, 13, 13, 0.12);
