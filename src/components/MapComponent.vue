@@ -57,9 +57,10 @@ export default {
     let errorMessage = ref(null);
 
     const loader = new Loader({
-      apiKey: import.meta.env.GOOGLE_API_KEY,
+      apiKey: import.meta.env.VITE_GOOGLE_API_KEY,
       version: "weekly",
     });
+    console.log(import.meta.env.VITE_GOOGLE_API_KEY);
     //Mexico City coords - default
     const coordsPos = ref({
       lat: 19.432605,

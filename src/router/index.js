@@ -44,8 +44,7 @@ router.beforeEach((to, from, next) => {
   const isAuth = auth.token;
 
   if (to.meta.requireAuth) {
-    if (isAuth === null)
-      return next({ name: "login", query: { returnUrl: to.path } });
+    if (isAuth === null) return next({ name: "login", query: { returnUrl: to.path } });
 
     return next();
   } else {

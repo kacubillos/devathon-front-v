@@ -1,7 +1,5 @@
 <template>
-  <div
-    class="row align-items-start align-items-md-center justify-content-center vh-100"
-  >
+  <div class="row align-items-start align-items-md-center justify-content-center vh-100">
     <section class="text-center col-12 col-md-10 col-lg-6 px-5 py-4 my-4 form">
       <!-- Alert error -->
       <div v-if="error !== ''" class="alert alert-danger" role="alert">
