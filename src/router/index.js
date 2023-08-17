@@ -3,6 +3,7 @@ import LoginView from "@/views/LoginView.vue";
 import PageNotFoundView from "@/views/PageNotFoundView.vue";
 import HomeView from "@/views/HomeView.vue";
 import useAuthStore from "@/store/auth";
+import LostPetForm from "@/views/LostPetFormView.vue";
 
 const routes = [
   {
@@ -21,6 +22,12 @@ const routes = [
     /* if this path is not the last item, 404 error is displayed */
     path: "/:pathMatch(.*)*",
     component: PageNotFoundView,
+  },
+  {
+    path: "/registrar-mascota-perdida",
+    name: "lostPetForm",
+    component: LostPetForm,
+    meta: { requireAuth: true },
   },
 ];
 
