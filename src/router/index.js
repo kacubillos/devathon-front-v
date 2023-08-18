@@ -26,15 +26,15 @@ const routes = [
     meta: { requireAuth: false },
   },
   {
-    /* if this path is not the last item, 404 error is displayed */
-    path: "/:pathMatch(.*)*",
-    component: PageNotFoundView,
-  },
-  {
     path: "/registrar-mascota-perdida",
     name: "lostPetForm",
     component: LostPetForm,
     meta: { requireAuth: true },
+  },
+  {
+    /* if this path is not the last item, 404 error is displayed */
+    path: "/:pathMatch(.*)*",
+    component: PageNotFoundView,
   },
 ];
 
@@ -51,7 +51,8 @@ router.beforeEach((to, from, next) => {
   const isAuth = auth.token;
 
   if (to.meta.requireAuth) {
-    if (isAuth === null) return next({ name: "login", query: { returnUrl: to.path } });
+    if (isAuth === null)
+      return next({ name: "login", query: { returnUrl: to.path } });
 
     return next();
   } else {
