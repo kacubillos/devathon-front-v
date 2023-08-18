@@ -1,8 +1,8 @@
 <template>
-  <h1>Crea tu cuenta</h1>
+  <h1 class="text-4xl mb-8 mt-4">Crea tu cuenta</h1>
   <form class="my-3" @submit="saveUser">
     <div class="mb-2">
-      <label for="inputName" class="form-label text-start w-100"
+      <label for="inputName" class="block text-start mb-2"
         >Nombre completo</label
       >
       <input
@@ -15,7 +15,7 @@
       />
     </div>
     <div class="mb-2">
-      <label for="inputEmail" class="form-label text-start w-100"
+      <label for="inputEmail" class="block text-start mb-2"
         >Correo electrónico</label
       >
       <input
@@ -29,15 +29,15 @@
       />
       <div
         id="passwordHelpBlock"
-        class="text-start text-danger"
+        class="text-start text-red-500"
         :class="{ 'd-none': !errors?.email }"
       >
         {{ errors?.email }}
       </div>
     </div>
-    <div class="row mb-3">
-      <div class="form-group col-12 col-md-6">
-        <label for="inputPassword" class="form-label text-start w-100"
+    <div class="grid grid-cols-2 gap-2">
+      <div>
+        <label for="inputPassword" class="block text-start mb-2"
           >Contraseña</label
         >
         <input
@@ -53,8 +53,8 @@
           {{ isHide ? "Mostrar" : "Ocultar" }}
         </span>
       </div>
-      <div class="form-group col-12 col-md-6">
-        <label for="inputRepeatPassword" class="form-label text-start w-100"
+      <div>
+        <label for="inputRepeatPassword" class="block text-start mb-2"
           >Confirma tu contraseña</label
         >
         <input
@@ -72,13 +72,13 @@
       </div>
       <div
         id="passwordHelpBlock"
-        class="text-start text-danger mt-2"
+        class="text-start text-red-500 mb-2"
         :class="{ 'd-none': !errors?.password }"
       >
         {{ errors?.password }}
       </div>
     </div>
-    <button type="submit" class="btn-purple w-100 mt-3">
+    <button type="submit" class="btn-purple w-full mt-3">
       Registrarte ahora
     </button>
     <hr class="my-4" />
@@ -132,20 +132,12 @@ const saveUser = (e) => {
 </script>
 
 <style scoped>
-.form-input {
-  padding: var(--padding-button-2);
-}
-
 .password-icon {
   float: right;
   position: relative;
-  margin: -2.25em 1.5rem 0 0;
+  margin: -2.3em 1.5rem 0 0;
   padding-left: 0.5rem;
   cursor: pointer;
   background-color: var(--white-100);
-}
-
-.btn-purple {
-  padding: var(--padding-button-3);
 }
 </style>

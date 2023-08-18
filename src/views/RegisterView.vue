@@ -1,8 +1,6 @@
 <template>
-  <div
-    class="row align-items-start align-items-md-center justify-content-center"
-  >
-    <section class="text-center col-12 col-md-11 col-lg-7 px-5 py-4 my-5 form">
+  <div class="flex items-center justify-center h-screen">
+    <section class="text-center px-4 md:px-12 py-8 my-4 mx-2 lg:w-1/2 form">
       <!-- Dinamic component contain the two forms -->
       <component
         :is="currentComponent"

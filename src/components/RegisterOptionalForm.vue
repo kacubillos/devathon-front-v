@@ -1,19 +1,19 @@
 <template>
-  <h1>Información adicional</h1>
+  <h1 class="text-4xl mb-8 mt-4">Información opcional</h1>
   <form class="my-3" @submit.prevent="saveInfo">
     <div class="mb-3">
-      <label for="inputPhoto" class="form-label text-start w-100"
+      <label for="inputPhoto" class="block text-start mb-2"
         >Imagen de perfil</label
       >
       <input
         id="inputPhoto"
         accept="image/png, image/jpg, image/jpeg"
-        class="form-control"
+        class="form-input"
         type="file"
       />
     </div>
     <div class="mb-2">
-      <label for="inputPhone" class="form-label text-start w-100"
+      <label for="inputPhone" class="block text-start mb-2"
         >Numero de celular</label
       >
       <input
@@ -22,10 +22,9 @@
         type="number"
         class="form-input mb-2"
         placeholder="Escribe tu número de celular"
-        required
       />
     </div>
-    <button type="submit" class="btn-purple w-100 mt-3">Guardar</button>
+    <button type="submit" class="btn-purple w-full mt-3">Continuar</button>
   </form>
 </template>
 
@@ -40,13 +39,3 @@ const saveInfo = () => {
   emit("nextStep", { photo: "", phone: String(phone.value) });
 };
 </script>
-
-<style scoped>
-.form-input {
-  padding: var(--padding-button-2);
-}
-
-.btn-purple {
-  padding: var(--padding-button-3);
-}
-</style>
