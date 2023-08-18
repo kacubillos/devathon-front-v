@@ -1,13 +1,9 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
-
 :root {
   font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
   line-height: 1.5;
   font-weight: 400;
 
-  color: rgba(255, 255, 255, 0.87);
+  color: var(--neutral-title);
   background-color: var(--bg-100);
 
   font-synthesis: none;
@@ -121,12 +117,21 @@ body {
   color: var(--neutral-text-light);
 }
 
+.form-error, .form-error:hover {
+  border: 1px solid var(--red-100);
+}
+
+.form-error:focus {
+  outline: 1.3px solid var(--red-100);
+}
+
 .btn-black {
   background-color: var(--black-100);
   color: var(--bg-100);
   padding: var(--padding-button-2);
   border: none;
   border-radius: var(--border-radius-xs);
+  text-decoration: none;
 }
 
 .btn-black:hover {
@@ -139,6 +144,7 @@ body {
   padding: var(--padding-button-2);
   border: none;
   border-radius: var(--border-radius-xs);
+  text-decoration: none;
 }
 
 .btn-purple:hover {

@@ -1,5 +1,6 @@
 import { createRouter, createWebHistory } from "vue-router";
 import LoginView from "@/views/LoginView.vue";
+import RegisterView from "@/views/RegisterView.vue";
 import PageNotFoundView from "@/views/PageNotFoundView.vue";
 import HomeView from "@/views/HomeView.vue";
 import useAuthStore from "@/store/auth";
@@ -19,15 +20,21 @@ const routes = [
     meta: { requireAuth: false },
   },
   {
-    /* if this path is not the last item, 404 error is displayed */
-    path: "/:pathMatch(.*)*",
-    component: PageNotFoundView,
+    path: "/registro",
+    name: "register",
+    component: RegisterView,
+    meta: { requireAuth: false },
   },
   {
     path: "/registrar-mascota-perdida",
     name: "lostPetForm",
     component: LostPetForm,
     meta: { requireAuth: true },
+  },
+  {
+    /* if this path is not the last item, 404 error is displayed */
+    path: "/:pathMatch(.*)*",
+    component: PageNotFoundView,
   },
 ];
 
@@ -44,7 +51,8 @@ router.beforeEach((to, from, next) => {
   const isAuth = auth.token;
 
   if (to.meta.requireAuth) {
-    if (isAuth === null) return next({ name: "login", query: { returnUrl: to.path } });
+    if (isAuth === null)
+      return next({ name: "login", query: { returnUrl: to.path } });
 
     return next();
   } else {

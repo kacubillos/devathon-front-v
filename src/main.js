@@ -9,8 +9,8 @@ import piniaPluginPersistedstate from "pinia-plugin-persistedstate";
 import VeeValidatePlugin from "@/includes/validation";
 import { initializeApp } from "firebase/app";
 
-import "bootstrap/dist/css/bootstrap.css";
-import "normalize.css";
+import "virtual:uno.css";
+import "@unocss/reset/tailwind-compat.css";
 
 /* Define base url for all requests */
 axios.defaults.baseURL = import.meta.env.VITE_BACKEND_URL;
@@ -39,5 +39,3 @@ const firebaseConfig = {
 // Initialize Firebase
 initializeApp(firebaseConfig);
 app.mount("#app");
-
-import "bootstrap/dist/js/bootstrap.js";
