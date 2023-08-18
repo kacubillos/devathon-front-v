@@ -1,5 +1,5 @@
 <template>
-  <h2>
+  <h2 class="text-3xl mb-8 mt-4">
     {{
       props.isCreated
         ? "Cuenta creada correctamente"
@@ -8,7 +8,7 @@
   </h2>
   <img
     :src="props.isCreated ? '/src/assets/done.svg' : '/src/assets/error.svg'"
-    class="w-50 mt-2 mb-4"
+    class="w-1/2 mb-8 mx-auto"
     alt="Done icon from unDraw"
   />
   <p>

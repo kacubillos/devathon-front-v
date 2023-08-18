@@ -1,14 +1,16 @@
 <template>
-  <div
-    class="row align-items-start align-items-md-center justify-content-center vh-100"
-  >
-    <section class="text-center col-12 col-md-10 col-lg-6 px-5 py-4 my-4 form">
+  <div class="flex items-center justify-center h-screen">
+    <section class="text-center px-4 md:px-12 lg:w-1/2 py-8 mx-2 form">
       <!-- Alert error -->
-      <div v-if="error !== ''" class="alert alert-danger" role="alert">
+      <div
+        v-if="error !== ''"
+        class="bg-red-100 text-red-700 p-4 mb-4 w-full"
+        role="alert"
+      >
         {{ error }}
       </div>
       <!-- Login form -->
-      <h1>¡Te damos la bienvenida de nuevo!</h1>
+      <h1 class="text-4xl mb-8 mt-4">¡Te damos la bienvenida de nuevo!</h1>
       <form class="my-3" @submit.prevent="login">
         <input
           id="inputEmail"
@@ -31,10 +33,10 @@
             {{ isHide ? "Mostrar" : "Ocultar" }}
           </span>
         </div>
-        <p class="d-block text-center text-md-end my-3">
+        <p class="d-block text-center md:text-end my-4">
           <a href="#" class="link">Recuperar contraseña</a>
         </p>
-        <button type="submit" class="btn-purple w-100">Iniciar sesión</button>
+        <button type="submit" class="btn-purple w-full">Iniciar sesión</button>
         <hr class="my-4" />
         <p>
           ¿No tienes una cuenta?
@@ -80,18 +82,10 @@ const login = async () => {
 </script>
 
 <style scoped>
-.form-input {
-  padding: var(--padding-button-2);
-}
-
 .password-icon {
   float: right;
   position: relative;
-  margin: -2.25em 1.5rem 0 0;
+  margin: -2.5em 1.5rem 0 0;
   cursor: pointer;
-}
-
-.btn-purple {
-  padding: var(--padding-button-3);
 }
 </style>
